@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         return response()->json(Post::all());

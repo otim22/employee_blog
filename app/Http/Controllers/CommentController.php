@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+
+    }
+
     public function store(Request $request)
     {
         $comment = new Comment;
