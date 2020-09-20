@@ -17,9 +17,9 @@ class PostController extends Controller
         return response()->json(Post::find($id));
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'title' => 'required|max:25',
             'body' => 'required|max:255'
         ]);
@@ -32,11 +32,11 @@ class PostController extends Controller
     public function update($id, Request $request)
     {
         try {
-            $request->validate([
+            $this->validate($request, [
                 'title' => 'required|max:25',
                 'body' => 'required|max:255'
             ]);
-            
+
             $post = Post::findOrFail($id);
             $post->fill($request->all())->save();
 
@@ -57,6 +57,5 @@ class PostController extends Controller
         } catch (\Exception $e) {
             return response('Failed to delete post', 500);
         }
-
     }
 }
