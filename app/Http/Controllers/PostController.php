@@ -19,6 +19,11 @@ class PostController extends Controller
 
     public function create(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:25',
+            'body' => 'required|max:255'
+        ]);
+
         $post = Post::create($request->all());
 
         return response()->json($post, 201);
@@ -27,6 +32,11 @@ class PostController extends Controller
     public function update($id, Request $request)
     {
         try {
+            $request->validate([
+                'title' => 'required|max:25',
+                'body' => 'required|max:255'
+            ]);
+            
             $post = Post::findOrFail($id);
             $post->fill($request->all())->save();
 
@@ -42,7 +52,7 @@ class PostController extends Controller
             if(!Post::find($id)) return $this->response('Post not found!', 404);
 
             if(Post::findOrFail($id)->delete()) {
-                return $this->response('Post deleted successfully!', 200);
+                return $this->response('Post deleted successfully!', 204);
             }
         } catch (\Exception $e) {
             return response('Failed to delete post', 500);
