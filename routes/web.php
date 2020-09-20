@@ -29,8 +29,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('posts',  ['uses' => 'PostController@index']);
     $router->get('posts/{id}', ['uses' => 'PostController@show']);
     $router->post('posts', ['uses' => 'PostController@store']);
-    $router->delete('posts/{id}', ['uses' => 'PostController@delete']);
     $router->put('posts/{id}', ['uses' => 'PostController@update']);
+    $router->delete('posts/{id}', ['uses' => 'PostController@delete']);
 
+    $router->get('comments', ['uses' => 'CommentController@index']);
+    $router->get('comments/{id}', ['uses' => 'CommentController@show']);
     $router->post('comments', ['uses' => 'CommentController@store']);
+    $router->put('comments/{id}', ['uses' => 'CommentController@update']);
+    $router->delete('comments/{id}', ['uses' => 'CommentController@delete']);
 });
