@@ -1,24 +1,47 @@
-# Lumen PHP Framework
+# Employee Blog
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+Employee blog is a simple blog application based on lumen microframe work of laravel.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Setup
+First of all clone the application from github
 
-## Official Documentation
+```bash
+git clone https://github.com/otim22/employee_blog.git
+```
+Enter into the directory
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+```bash
+cd employee_blog
+```
+
+Ensure you have composer install on your terminal, then install application dependencies by run the following commad
+
+```bash
+composer install
+```
+
+Set JWT
+
+```bash
+php artisan jwt:secret
+```
+
+After then run migrations
+
+```bash
+php artisan migrate
+```
+
+Lastly, you start the application which gets served to port 8000 and can start playing around with the application.
+
+```bash
+php -S localhost:8000 -t public
+```
 
 ## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Please make sure to update tests as appropriate.
 
 ## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+[MIT](https://opensource.org/licenses/MIT)
