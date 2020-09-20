@@ -39,9 +39,11 @@ class PostController extends Controller
     public function delete($id)
     {
         try {
-            Post::findOrFail($id)->delete();
+            if(!Post::find($id)) return $this->response('Post not found!', 404);
 
-            return response('Post deleted Successfully', 200);
+            if(Post::findOrFail($id)->delete()) {
+                return $this->response('Post deleted successfully!', 200);
+            }
         } catch (\Exception $e) {
             return response('Failed to delete post', 500);
         }
