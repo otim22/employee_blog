@@ -10,15 +10,13 @@ class CommentController extends Controller
 {
     public function store(Request $request)
     {
-        $post = Post::findOrFail($request->post_id);
+        $comment = new Comment;
+       $comment->body = $request->body;
+       $comment->user()->associate($request->user());
 
-        Comment::create([
-            'body' => $request->body,
-            'user_id' => Auth::id(),
-            'post_id' => $post->id
-        ]);
+       $post = Post::find($request->post_id);
+       $post->comments()->save($comment);
 
         return response()->json($post, 201);
     }
-
 }

@@ -17,11 +17,16 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api', 'middleware' => 'auth'], function () use ($router) {
-  $router->get('posts',  ['uses' => 'PostController@index']);
-  $router->get('posts/{id}', ['uses' => 'PostController@show']);
-  $router->post('posts', ['uses' => 'PostController@store']);
-  $router->delete('posts/{id}', ['uses' => 'PostController@delete']);
-  $router->put('posts/{id}', ['uses' => 'PostController@update']);
+$router->group(['prefix' => 'api'], function () use ($router) {
 
+    $router->post('register', 'AuthController@register');
+    $router->post('login', 'AuthController@login');
+
+    $router->get('posts',  ['uses' => 'PostController@index']);
+    $router->get('posts/{id}', ['uses' => 'PostController@show']);
+    $router->post('posts', ['uses' => 'PostController@store']);
+    $router->delete('posts/{id}', ['uses' => 'PostController@delete']);
+    $router->put('posts/{id}', ['uses' => 'PostController@update']);
+
+    $router->post('comments', ['uses' => 'CommentController@store']);
 });
