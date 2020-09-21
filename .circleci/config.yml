@@ -10,7 +10,7 @@ jobs:
                     - MYSQL_USER=root
                     - MYSQL_PASSWORD=
                     - MYSQL_ALLOW_EMPTY_PASSWORD=true
-                    - MYSQL_DATABASE=blog_test_db
+                    - MYSQL_DATABASE=circle_test
 
         steps:
             - checkout
@@ -50,8 +50,9 @@ jobs:
                 command: php artisan jwt:secret
 
             - run:
-                name: "Run migration"
+                name: "Create database and run migration"
                 command: |
+                    touch database/database.sqlite
                     php artisan migrate --env=testing
 
             # run tests with phpunit
