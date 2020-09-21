@@ -41,6 +41,12 @@ Lastly, you start the application which gets served to port 8000 and can start p
 php -S localhost:8000 -t public
 ```
 
+Feel free check out my endpoints on postman
+
+```bash
+[Postman] (https://identity.getpostman.com/signup?continue=https%3A%2F%2Fgo.postman.co%2Fbuild&_ga=2.140877810.1790694350.1598553192-237910329.1598553192)
+```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
