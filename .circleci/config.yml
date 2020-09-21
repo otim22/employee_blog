@@ -5,15 +5,22 @@ jobs:
         docker:
             # Specify the version you desire here
             - image: circleci/php:7.4-node-browsers
-            - image: circleci/mysql:5.7
+            - image: circleci/mysql:8.0.20-ram
+                command: mysqld --default-authentication-plugin=mysql_native_password
                 environment:
-                    - MYSQL_USER=root
-                    - MYSQL_PASSWORD=
-                    - MYSQL_ALLOW_EMPTY_PASSWORD=true
-                    - MYSQL_DATABASE=circle_test
+                    MYSQL_USER: root
+                    MYSQL_DATABASE: blog_db
+                    MYSQL_ROOT_PASSWORD: ''
+                    MYSQL_PASSWORD: 'root'
 
         steps:
             - checkout
+
+            - run:
+                name: Install MySQL driver
+                command: |
+                    sudo docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
+                    sudo docker-php-ext-install zip bcmath pdo_mysql
 
             - run:
                 name: "Prepare Environment"
@@ -49,11 +56,9 @@ jobs:
                 name: "Set JWT"
                 command: php artisan jwt:secret
 
-            - run:
-                name: "Create database and run migration"
-                command: |
-                    touch database/database.sqlite
-                    php artisan migrate --env=testing
+            # prepare the database
+            - run: touch storage/testing.sqlite
+            - run: php artisan migrate --env=testing --database=mysql --force
 
             # run tests with phpunit
             - run:
