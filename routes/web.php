@@ -36,5 +36,6 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('comments/{id}', ['uses' => 'CommentController@show']);
     $router->post('comments', ['uses' => 'CommentController@store']);
     $router->put('comments/{id}', ['uses' => 'CommentController@update']);
+    $router->patch('comments/{id}', ['uses' => 'CommentController@hideComment']);
     $router->delete('comments/{id}', ['uses' => 'CommentController@delete']);
 });

@@ -37,7 +37,7 @@ class CommentController extends Controller
         $post = Post::find($request->post_id);
         $post->comments()->save($comment);
 
-        return response()->json($post, 201);
+        return response()->json($comment, 201);
     }
 
     public function update($id, Request $request)
@@ -50,19 +50,63 @@ class CommentController extends Controller
             $comment = Comment::findOrFail($id);
             $comment->fill($request->all())->save();
 
-            return response()->json($post, 200);
+            return response()->json($comment, 200);
         } catch (\Exception $e) {
             return response('Failed to update comment', 500);
         }
     }
 
-    public function delete($id)
+    public function hideComment($id, Request $request)
     {
         try {
-            if(!Comment::find($id)) return $this->response('Comment not found!', 404);
+            if(!Comment::find($id)) return response('Comment not found!', 404);
 
-            if(Comment::findOrFail($id)->delete()) {
-                return $this->response('Comment deleted successfully!', 204);
+            if($request->user()) {
+                $comment = new Comment;
+
+                if(method_exists($comment, 'trashed')) {
+                    $comment->findOrFail($id)->delete();
+
+                    return response('Comment hidden successfully!', 204);
+                }
+            }
+        } catch (\Exception $e) {
+            return response('Failed to hide comment', 500);
+        }
+    }
+
+    public function unHideComment($id, Request $request)
+    {
+        try {
+            if(!Comment::find($id)) return response('Comment not found!', 404);
+
+            if($request->user()) {
+                $comment = new Comment;
+
+                if(method_exists($comment, 'trashed')) {
+                    $comment->withTrashed()->where('id', $id)->restore();
+
+                    return response('Comment restored successfully!', 204);
+                }
+            }
+        } catch (\Exception $e) {
+            return response('Failed to restore comment', 500);
+        }
+    }
+
+    public function delete($id, Request $request)
+    {
+        try {
+            if(!Comment::find($id)) return response('Comment not found!', 404);
+
+            if($request->user()) {
+                $comment = new Comment;
+
+                if(method_exists($comment, 'trashed')) {
+                    $comment->findOrFail($id)->forceDelete();
+
+                    return response('Comment deleted successfully!', 204);
+                }
             }
         } catch (\Exception $e) {
             return response('Failed to delete comment', 500);
