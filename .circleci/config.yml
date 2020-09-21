@@ -49,10 +49,6 @@ jobs:
                 name: "Set JWT"
                 command: php artisan jwt:secret
 
-            # prepare the database
-            - run: touch storage/testing.sqlite
-            - run: php artisan migrate --env=testing --database=mysql --force
-
             # run tests with phpunit
             - run:
                 name: "Run Tests"
