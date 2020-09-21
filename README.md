@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/otim22/employee_blog.svg?style=svg&circle-token=2a074ca89189a48646eb464227431b5e28d138ec)](https://app.circleci.com/pipelines/github/otim22/employee_blog/14/workflows/11b676aa-b86e-4bff-abda-0895a17a92a3/jobs/14)
+
+
 # Employee Blog
 
 Employee blog is a simple blog application based on lumen microframe work of laravel.
