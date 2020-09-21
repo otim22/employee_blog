@@ -70,7 +70,7 @@ The api exposes the following endpoints.
 * DELETE /api/comments/id
 
 ```sh
-# Endpoint POST /api/register'
+# Endpoint POST /api/register
 
 Parameters.
  {
@@ -99,7 +99,7 @@ Returned Data.
 ```
 
 ```sh
-# Endpoint POST /api/login'
+# Endpoint POST /api/login
 
 Parameters.
  {
@@ -130,7 +130,7 @@ Copy the string of token generated and in the headers
 ```
 
 ```sh
-# Vist endpoint GET /api/posts'
+# Vist endpoint GET /api/posts
 
 Parameters.
 [
