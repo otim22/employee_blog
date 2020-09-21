@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         return response()->json(Post::all());
@@ -59,10 +59,10 @@ class PostController extends Controller
     public function delete($id)
     {
         try {
-            if(!Post::find($id)) return $this->response('Post not found!', 404);
+            if(! Post::find($id)) return response('Post not found!', 404);
 
             if(Post::findOrFail($id)->delete()) {
-                return $this->response('Post deleted successfully!', 204);
+                return response('Post deleted successfully!', 204);
             }
         } catch (\Exception $e) {
             return response('Failed to delete post', 500);
