@@ -14,7 +14,6 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Post::factory()->create(['title' => 'test', 'body' => 'some long text here']);
         \App\Models\Post::factory()->count(10)->create();
     }
 }
