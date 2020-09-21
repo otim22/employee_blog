@@ -6,10 +6,10 @@
 Employee blog is a simple blog application based on lumen microframe work of laravel.
 
 ## Setup
- First of all clone the application from github
+ 
 
 ```sh
-# Clone the project
+# Clone the project from github
 git clone https://github.com/otim22/employee_blog.git
 
 # Enter into the directory
@@ -160,8 +160,6 @@ Parameters.
 ]
 
 ```
-
-## Expire promo code.
 
 ```sh
 # Endpoint POST /api/comments
