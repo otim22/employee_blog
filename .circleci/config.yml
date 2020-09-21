@@ -1,9 +1,16 @@
 version: 2
+
 jobs:
     build:
         docker:
             # Specify the version you desire here
             - image: circleci/php:7.4-node-browsers
+            - image: circleci/mysql:5.7
+                environment:
+                    - MYSQL_USER=root
+                    - MYSQL_PASSWORD=
+                    - MYSQL_ALLOW_EMPTY_PASSWORD=true
+                    - MYSQL_DATABASE=blog_test_db
 
         steps:
             - checkout
@@ -43,9 +50,8 @@ jobs:
                 command: php artisan jwt:secret
 
             - run:
-                name: "Create database and run migration"
+                name: "Run migration"
                 command: |
-                    touch database/database.sqlite
                     php artisan migrate --env=testing
 
             # run tests with phpunit
