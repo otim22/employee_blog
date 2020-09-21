@@ -5,13 +5,6 @@ jobs:
         docker:
             # Specify the version you desire here
             - image: circleci/php:7.4-node-browsers
-            - image: circleci/mysql:8.0.20-ram
-                command: mysqld --default-authentication-plugin=mysql_native_password
-                environment:
-                    MYSQL_USER: root
-                    MYSQL_DATABASE: blog_db
-                    MYSQL_ROOT_PASSWORD: ''
-                    MYSQL_PASSWORD: 'root'
 
         steps:
             - checkout
@@ -55,10 +48,6 @@ jobs:
             - run:
                 name: "Set JWT"
                 command: php artisan jwt:secret
-
-            # prepare the database
-            - run: touch storage/testing.sqlite
-            - run: php artisan migrate --env=testing --database=mysql --force
 
             # run tests with phpunit
             - run:
